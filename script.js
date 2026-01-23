@@ -1,3 +1,6 @@
+//Global scoring variables
+playerScore = 0;
+compScore = 0;
 
 //Gets the players choice for the game, converts to UPPER and checks if it's valid
 function getPlayerChoice()
