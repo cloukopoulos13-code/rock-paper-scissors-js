@@ -92,7 +92,7 @@ function playRound()
 //Plays 5 rounds of Rock, Paper, Scissors and announces the winner
 function playGame()
 {
-    for (let round = 0; loop <=4; round++)
+    for (let round = 0; round <=4; round++)
     {
         playRound();
         console.log(`Player Score: ${playerScore}  |  Computer Score: ${compScore}`);
@@ -111,3 +111,7 @@ function playGame()
         console.log("It's A Tie.");
     }
 }
+
+
+//Start the game
+playGame();
