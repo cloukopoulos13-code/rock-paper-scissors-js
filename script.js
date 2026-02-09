@@ -39,26 +39,37 @@ function getCompChoice()
 }
 
 //Gets the player and computer choices, then compares to see who wins the round
-function playRound()
+function playRound(playerChoice)
 {
-    let playerChoice = getPlayerChoice();
     let compChoice = getCompChoice();
+    const resultDisplay = document.querySelector(".results");
+    const playerPick = document.querySelector(".player-pick");
+    const compPick = document.querySelector(".comp-pick");
+    const winner = document.querySelector(".round-winner");
+    const playerPointUI = document.querySelector(".player-score");
+    const computerPointUI = document.querySelector(".comp-score");
 
-    console.log(`You chose: ${playerChoice}`);
-    console.log(`Computer chose: ${compChoice}`);
+    //console.log(`You chose: ${playerChoice}`);
+    //console.log(`Computer chose: ${compChoice}`);
+
+    playerPick.textContent = `You chose: ${playerChoice}`;
+    compPick.textContent = `Computer chose: ${compChoice}`;
 
     if (playerChoice === compChoice)
     {
+        winner.textContent = "It's a draw!";
         console.log("It's a draw!");
     }
     else if (playerChoice === "ROCK")
     {
         if(compChoice === "PAPER")
         {
+            winner.textContent = "You lost.";
             console.log("You lost.");
             compScore++;
         }
         else{
+            winner.textContent = "You win!";
             console.log("You win!");
             playerScore++;
         }
@@ -67,11 +78,13 @@ function playRound()
     {
         if(compChoice === "SCISSORS")
         {
-            console.log("You lost.");
+            winner.textContent = "You lost.";
+            //console.log("You lost.");
             compScore++;
         }
         else{
-            console.log("You win!");
+            winner.textContent = "You win!";
+            //console.log("You win!");
             playerScore++;
         }
     }
@@ -79,14 +92,18 @@ function playRound()
     {
         if(compChoice === "ROCK")
         {
+            winner.textContent = "You lost.";
             console.log("You lost.");
             compScore++;
         }
         else{
+            winner.textContent = "You win!";
             console.log("You win!");
             playerScore++;
         }
     }
+    playerPointUI.textContent = `Your Score: ${playerScore}`;
+    computerPointUI.textContent = `Computer Score: ${compScore}`;
 }
 
 //Plays 5 rounds of Rock, Paper, Scissors and announces the winner
@@ -113,5 +130,14 @@ function playGame(rounds)
 }
 
 
-//Start the game
-//playGame(1);
+//Game UI Logic
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+            
+        playRound(button.className.toUpperCase());
+        })
+    
+    }
+)
