@@ -1,6 +1,7 @@
 //Global scoring variables
 let playerScore = 0;
 let compScore = 0;
+let currentRound = 0;
 
 //Gets the players choice for the game, converts to UPPER and checks if it's valid
 function getPlayerChoice()
@@ -51,7 +52,7 @@ function playRound(playerChoice)
 
     //console.log(`You chose: ${playerChoice}`);
     //console.log(`Computer chose: ${compChoice}`);
-
+    
     playerPick.textContent = `You chose: ${playerChoice}`;
     compPick.textContent = `Computer chose: ${compChoice}`;
 
@@ -104,6 +105,34 @@ function playRound(playerChoice)
     }
     playerPointUI.textContent = `Your Score: ${playerScore}`;
     computerPointUI.textContent = `Computer Score: ${compScore}`;
+    ++currentRound;
+    console.log(currentRound);
+    if(currentRound === 5)
+    {
+        console.log("Game Over");
+        buttons.forEach(button => { button.style.visibility = "hidden" });
+        let winner = "";
+        if(playerScore > compScore)
+        {
+            winner = "You";
+        }
+        else{
+            winner = "The Computer";
+        }
+        const winDisplay = document.querySelector(".winner");
+        winDisplay.textContent = `Game End! Winner: ${winner}`;
+        let restart = document.createElement("button");
+        restart.textContent = "Restart";
+        document.body.append(restart)
+        restart.addEventListener("click", (e) => {
+            currentRound = 0;
+            playerScore = 0;
+            compScore = 0;
+            buttons.forEach(button => { button.style.visibility = "visible" });
+            winDisplay.textContent = "";
+            e.target.remove();
+        })
+    }
 }
 
 //Plays 5 rounds of Rock, Paper, Scissors and announces the winner
@@ -141,3 +170,4 @@ buttons.forEach(button => {
     
     }
 )
+
