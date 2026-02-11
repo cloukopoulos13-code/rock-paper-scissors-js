@@ -43,12 +43,6 @@ function getCompChoice()
 function playRound(playerChoice)
 {
     let compChoice = getCompChoice();
-    const resultDisplay = document.querySelector(".results");
-    const playerPick = document.querySelector(".player-pick");
-    const compPick = document.querySelector(".comp-pick");
-    const winner = document.querySelector(".round-winner");
-    const playerPointUI = document.querySelector(".player-score");
-    const computerPointUI = document.querySelector(".comp-score");
 
     //console.log(`You chose: ${playerChoice}`);
     //console.log(`Computer chose: ${compChoice}`);
@@ -119,15 +113,26 @@ function playRound(playerChoice)
         else{
             winner = "The Computer";
         }
+
+        //Display winner on screen
         const winDisplay = document.querySelector(".winner");
         winDisplay.textContent = `Game End! Winner: ${winner}`;
         let restart = document.createElement("button");
         restart.textContent = "Restart";
         document.body.append(restart)
+
+        //When restart button pressed
         restart.addEventListener("click", (e) => {
+            //Reset game logic
             currentRound = 0;
             playerScore = 0;
             compScore = 0;
+
+            //Reset UI
+            playerPointUI.textContent = `Your Score: ${playerScore}`;
+            computerPointUI.textContent = `Computer Score: ${compScore}`;
+            playerPick.textContent = `You chose: `;
+            compPick.textContent = `Computer chose: `;
             buttons.forEach(button => { button.style.visibility = "visible" });
             winDisplay.textContent = "";
             e.target.remove();
@@ -159,8 +164,14 @@ function playGame(rounds)
 }
 
 
-//Game UI Logic
+//Define UI for updating and clearing
 const buttons = document.querySelectorAll("button");
+const resultDisplay = document.querySelector(".results");
+const playerPick = document.querySelector(".player-pick");
+const compPick = document.querySelector(".comp-pick");
+const winner = document.querySelector(".round-winner");
+const playerPointUI = document.querySelector(".player-score");
+const computerPointUI = document.querySelector(".comp-score");
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
